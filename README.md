@@ -15,6 +15,6 @@ Can also be installed automatically via [Thunderstore Mod Manager](https://www.o
 4. You can view the fish you've discovered and your current haul in the Fishing inventory.
 5. Return to the Hungry Craw with fish to sell them for rosaries.
 
-<img width="2726" height="1323" alt="all fish" src="https://github.com/user-attachments/assets/46626136-5a69-4c11-a695-053e570e72de" />
+![Display of features](https://raw.githubusercontent.com/AlphaLul/Silksong.PharloomFishing/main/features.png)
 
 ### Massive thank you to RPGenocraft for providing some of the fish designs for this mod. Check out their post [here](https://bsky.app/profile/rpgenocraft.bsky.social/post/3mdxskxizus22).
