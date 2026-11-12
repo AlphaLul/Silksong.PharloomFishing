@@ -1,4 +1,4 @@
-A BepInEx mod that adds a fishing minigame to Hollow Knight: Silksong.
+A mod that adds a fishing minigame to Hollow Knight: Silksong.
 
 # Installation
 1. Install BepInEx 5 for Silksong
