@@ -47,7 +47,7 @@ public static class FishingSpotHelper
         GameObject rippleObject = new("Ripple");
         float animationOffset = Mathf.Lerp(0f, 0.35f, Mathf.InverseLerp(1.6f, 3f, Vector2.Distance(rayOrigin, hit.point)));
         rippleObject.transform.SetParent(fishingSpotObject.transform);
-        rippleObject.transform.position = new Vector3(hit.point.x, hit.point.y + fishingSpot.RippleOffset, 0.006f);
+        rippleObject.transform.position = new Vector3(hit.point.x, hit.point.y + fishingSpot.RippleOffset.y, 0.006f + fishingSpot.RippleOffset.z);
         rippleObject.AddComponent<SpriteRenderer>();
         
         interactable.Initialize(fishingSpot, hit.collider.gameObject.GetComponentInParent<SurfaceWaterRegion>(), rippleObject.transform, animationOffset);

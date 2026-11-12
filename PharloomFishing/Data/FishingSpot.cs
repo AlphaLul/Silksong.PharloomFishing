@@ -10,13 +10,14 @@ public class FishingSpot(
     Vector2 worldPos,
     Vector2 mapPos,
     bool facingRight,
-    float rippleOffset,
+    float rippleOffsetY,
+    float rippleOffsetZ,
     Fish[] fishes)
 {
     public readonly string WorldRoom = worldRoom, MapRoom = mapRoom;
     public readonly Vector2 WorldPos = worldPos, MapPos = mapPos;
     public readonly bool FacingRight = facingRight;
-    public readonly float RippleOffset = rippleOffset;
+    public readonly Vector3 RippleOffset = new Vector3(0, rippleOffsetY, rippleOffsetZ);
     public readonly Fish[] Fishes = fishes;
 
     public (Fish, float, bool, bool) CatchFish(List<Fish> availableFishes, bool isQuickCatch)
@@ -58,11 +59,12 @@ public class FishingSpot(
     }
 }
 
-public struct FishingSpotJson(string worldRoom, string mapRoom, float[] worldPos, float[] mapPos, bool facingRight, float rippleOffset, string[] fishIds)
+public struct FishingSpotJson(string worldRoom, string mapRoom, float[] worldPos, float[] mapPos, bool facingRight, float rippleOffsetY, float rippleOffsetZ, string[] fishIds)
 {
     public readonly string WorldRoom = worldRoom, MapRoom = mapRoom;
     public readonly float[] WorldPos = worldPos, MapPos = mapPos;
     public readonly bool FacingRight = facingRight;
-    public readonly float RippleOffset = rippleOffset;
+    public readonly float RippleOffsetY = rippleOffsetY;
+    public readonly float RippleOffsetZ = rippleOffsetZ;
     public readonly string[] FishIds = fishIds;
 }

@@ -97,7 +97,8 @@ public static class DataManager
                 worldPos: new Vector2(jsonEntry.WorldPos[0], jsonEntry.WorldPos[1]),
                 mapPos: new Vector2(jsonEntry.MapPos[0], jsonEntry.MapPos[1]),
                 facingRight: jsonEntry.FacingRight,
-                rippleOffset: jsonEntry.RippleOffset,
+                rippleOffsetY: jsonEntry.RippleOffsetY,
+                rippleOffsetZ: jsonEntry.RippleOffsetZ,
                 fishes: jsonEntry.FishIds.Select(id => Fishes[id]).ToArray()
             );
             
