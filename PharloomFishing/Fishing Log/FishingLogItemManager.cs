@@ -46,6 +46,7 @@ public class FishingLogItemManager : InventoryItemManager, IInventoryPaneAvailab
     {
         base.Awake();
         GetComponent<InventoryPaneBase>().OnPaneStart += UpdatePane;
+        SetDisplay(gameObject);
         UpdatePane();
     }
 

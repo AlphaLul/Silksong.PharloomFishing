@@ -55,7 +55,8 @@ public static class InventoryHelper
             PitchMax = 1f,
             Volume = 1f
         };
-        
+
+        pane.playerDataTest = new PlayerDataTest();
         pane.availabilityProvider = itemManager;
         
         //Make item grids

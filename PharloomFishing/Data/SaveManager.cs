@@ -22,7 +22,7 @@ public static class SaveManager
         return Path.Combine(ModSavePath, $"user{saveSlot}.dat");
     }
 
-    public static void CreateSaveSlotData(int saveSlot)
+    private static void CreateSaveSlotData(int saveSlot)
     {
         if (File.Exists(GetSaveSlotPath(saveSlot))) return;
         
@@ -52,7 +52,7 @@ public static class SaveManager
     {
         if (!File.Exists(GetSaveSlotPath(saveSlot)))
         {
-            PharloomFishing.LogError($"Save slot {saveSlot} data not found, making new one");
+            PharloomFishing.LogInfo($"Save slot {saveSlot} data not found, making new one");
             CreateSaveSlotData(saveSlot);
         }
 

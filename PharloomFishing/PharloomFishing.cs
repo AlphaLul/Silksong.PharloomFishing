@@ -3,7 +3,7 @@ using HarmonyLib;
 
 namespace PharloomFishing;
 
-[BepInAutoPlugin(id: "alphalul.PharloomFishing", name: "Pharloom Fishing", version: "1.0.0")]
+[BepInAutoPlugin(id: "alphalul.PharloomFishing", name: "Pharloom Fishing", version: "1.0.1")]
 public partial class PharloomFishing : BaseUnityPlugin
 {
     private static PharloomFishing _instance;

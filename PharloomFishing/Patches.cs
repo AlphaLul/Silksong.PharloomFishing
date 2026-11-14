@@ -207,7 +207,7 @@ internal class Patches
     private static void GameManager_StartNewGamePostfix(GameManager __instance)
     {
         SaveManager.DeleteSaveSlotData(__instance.profileID);
-        SaveManager.CreateSaveSlotData(__instance.profileID);
+        SaveManager.LoadSaveSlotData(__instance.profileID);
     }
 
     [HarmonyPatch(typeof(GameManager), nameof(GameManager.SetLoadedGameData), typeof(SaveGameData), typeof(int))]
@@ -217,7 +217,7 @@ internal class Patches
         SaveManager.LoadSaveSlotData(saveSlot);
     }
     
-    [HarmonyPatch(typeof(GameManager), nameof(GameManager.SaveGame), typeof(int), typeof(System.Action<bool>), typeof(bool), typeof(AutoSaveName))]
+    [HarmonyPatch(typeof(GameManager), nameof(GameManager.SaveGame), typeof(int), typeof(Action<bool>), typeof(bool), typeof(AutoSaveName))]
     [HarmonyPostfix]
     private static void GameManager_SaveGamePostfix(int saveSlot)
     {

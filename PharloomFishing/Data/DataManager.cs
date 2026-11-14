@@ -18,7 +18,8 @@ public static class DataManager
         new(40, 100)
     ];
     public static readonly int[] Probabilities = [14, 9, 3, 1];
-    public static readonly int[] QuickProbabilities = [0, 5, 4, 2];
+    public static readonly int[] LastCommonProbabilities = [19, 9, 3, 1];
+    public static readonly int[] QuickProbabilities = [0, 4, 4, 2];
     public const float BaseQuickCatchWindow = 0.17f;
     public const float CatchWindow = 0.55f;
 

@@ -19,25 +19,39 @@ public class FishingSpot(
     public readonly bool FacingRight = facingRight;
     public readonly Vector3 RippleOffset = new Vector3(0, rippleOffsetY, rippleOffsetZ);
     public readonly Fish[] Fishes = fishes;
+    private Fish? _lastFishCaught;
 
     public (Fish, float, bool, bool) CatchFish(List<Fish> availableFishes, bool isQuickCatch)
     {
         Fish? fishCaught = null;
-        int[] probabilities = isQuickCatch ? DataManager.QuickProbabilities : DataManager.Probabilities;
+        if (_lastFishCaught != null && !availableFishes.Contains(_lastFishCaught)) _lastFishCaught = null;
         
-        int totalProbability = availableFishes.Sum(fish => probabilities[(int)fish.Rarity]);
+        bool disallowLastFish = _lastFishCaught != null && Random.value > 0.5f;
+        List<Fish> possibleFishes = disallowLastFish && _lastFishCaught != null
+            ? [.. availableFishes.Where(fish => fish != _lastFishCaught)]
+            : availableFishes;
+        
+        int[] normalProbabilities = disallowLastFish && _lastFishCaught?.Rarity == FishRarity.Common 
+            ? DataManager.LastCommonProbabilities 
+            : DataManager.Probabilities;
+        int[] probabilities = isQuickCatch ? DataManager.QuickProbabilities : normalProbabilities;
+        
+        int totalProbability = possibleFishes.Sum(fish => probabilities[(int)fish.Rarity]);
+        
         int roll = Random.Range(0, totalProbability);
         int cumulativeProbability = 0;
-        foreach (Fish fish in availableFishes)
+        
+        foreach (Fish fish in possibleFishes)
         {
             cumulativeProbability += probabilities[(int)fish.Rarity];
-
             if (roll >= cumulativeProbability) continue;
+            
             fishCaught = fish;
             break;
         }
         
-        fishCaught ??= availableFishes[0];
+        fishCaught ??= possibleFishes[0];
+        _lastFishCaught = fishCaught;
         
         float fishWeight = Random.value;
         bool inventoryFull = SaveManager.CurrentSlotData.Inventory.Count >= DataManager.MaxInventory;
