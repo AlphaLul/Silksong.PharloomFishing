@@ -12,12 +12,12 @@ public class CatchFishPopup : SavedItem, ICollectableUIMsgItem
     private readonly LocalisedString _popupFormat = new LocalisedString("UI", "POPUP_CATCH_FISH");
     private readonly LocalisedString _fullText = new LocalisedString("UI", "POPUP_INVENTORY_FULL");
 
-    public void ShowPopup(Fish fish, float weight, bool newLargest, bool inventoryFull)
+    public void ShowPopup(Fish fish, float weight, bool newLargest)
     {
         _fishSprite = fish.FishSprite;
         CollectableUIMsg popup = CollectableUIMsg.Spawn(this);
         
-        popup.nameText.text = PopupText(fish, weight, newLargest, inventoryFull);
+        popup.nameText.text = PopupText(fish, weight, newLargest, SaveManager.CurrentSlotData.IsInventoryFull());
         LayoutElement popupLayout = popup.transform.Find("Text Container").GetComponent<LayoutElement>();
         popupLayout.minWidth = 7.5f;
         popupLayout.minHeight = 1.7f;

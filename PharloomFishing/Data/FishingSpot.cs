@@ -21,7 +21,7 @@ public class FishingSpot(
     public readonly Fish[] Fishes = fishes;
     private Fish? _lastFishCaught;
 
-    public (Fish, float, bool, bool) CatchFish(List<Fish> availableFishes, bool isQuickCatch)
+    public (Fish, float, bool) CatchFish(List<Fish> availableFishes, bool isQuickCatch)
     {
         Fish? fishCaught = null;
         if (_lastFishCaught != null && !availableFishes.Contains(_lastFishCaught)) _lastFishCaught = null;
@@ -54,8 +54,7 @@ public class FishingSpot(
         _lastFishCaught = fishCaught;
         
         float fishWeight = Random.value;
-        bool inventoryFull = SaveManager.CurrentSlotData.Inventory.Count >= DataManager.MaxInventory;
-        if (!inventoryFull)
+        if (!SaveManager.CurrentSlotData.IsInventoryFull())
         {
             SaveManager.CurrentSlotData.Inventory.Add(new FishingLogCollectable
             (
@@ -69,7 +68,7 @@ public class FishingSpot(
         bool newHeaviest = fishWeight > logEntry.LargestCaught;
         logEntry.LargestCaught = Mathf.Max(logEntry.LargestCaught, fishWeight);
         
-        return (fishCaught, fishWeight, newHeaviest, inventoryFull);
+        return (fishCaught, fishWeight, newHeaviest);
     }
 }
 

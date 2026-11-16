@@ -27,6 +27,8 @@ public class SaveData
         return Inventory.Count(fish => !fish.Locked);
     }
 
+    public bool IsInventoryFull() => Inventory.Count >= DataManager.MaxInventory;
+
     public int SellFish()
     {
         int total = 0;

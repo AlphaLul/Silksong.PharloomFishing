@@ -220,8 +220,8 @@ public class FishingSpotInteractable : NPCControlBase
     {
         _hc.gruntAudioTable.PlayOneShot(_hc.audioSource);
         _readyVoiceClip.PlayOnSource(_hc.audioSource);
-        _hc.animCtrl.Play("Taunt");
-        yield return new WaitForSeconds(_hc.animCtrl.GetCurrentClipDuration() - 0.1f);
+        _hc.animCtrl.Play("Taunt Collapse1");
+        yield return new WaitForSeconds(_hc.animCtrl.GetCurrentClipDuration() - 0.4f);
         _hc.animCtrl.Play("Taunt Idle");
         
         ShowReelPrompt();
@@ -232,7 +232,7 @@ public class FishingSpotInteractable : NPCControlBase
 
         if (_reactionWindowOpen)
         {
-            (Fish fishCaught, float weight, bool newHeaviest, bool inventoryFull) = _fishingSpot.CatchFish(_availableFishes, _isQuickCatch);
+            (Fish fishCaught, float weight, bool newHeaviest) = _fishingSpot.CatchFish(_availableFishes, _isQuickCatch);
             if (_isQuickCatch)
             {
                 _fishAudioEvent.SetAndSpawnOneShot(_quickCatchClip, _rippleTransform.position);
@@ -242,7 +242,7 @@ public class FishingSpotInteractable : NPCControlBase
             _fishAudioEvent.SetAndSpawnOneShot(fishCaught.CatchClip ?? _defaultFishCatchClip, _rippleTransform.position);
                 
             yield return CatchFishAnimation();
-            _catchFishPopup.ShowPopup(fishCaught, weight, newHeaviest, inventoryFull);
+            _catchFishPopup.ShowPopup(fishCaught, weight, newHeaviest);
         }
         else yield return CatchFishAnimation();
         

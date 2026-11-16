@@ -159,7 +159,7 @@ internal class Patches
         return false;
     }
     
-    //Make shortcut still lead to map
+    //Make shortcuts still lead to map
     [HarmonyPatch(typeof(InventoryPaneList), nameof(InventoryPaneList.GetPane), typeof(InventoryPaneList.PaneTypes))]
     [HarmonyPrefix]
     private static bool InventoryPaneList_GetPanePrefix(InventoryPaneList __instance, ref InventoryPane __result, InventoryPaneList.PaneTypes paneTypes)
@@ -179,10 +179,18 @@ internal class Patches
         if (!owner.name.StartsWith("Inventory", StringComparison.OrdinalIgnoreCase)) return;
         if (!string.Equals(__instance.FsmName, "Inventory Control", StringComparison.OrdinalIgnoreCase)) return;
 
-        FsmState? state = __instance.fsm.GetState("Map");
-        if (state == null) return;
-        SetCurrentInventoryPane? action = state.Actions.OfType<SetCurrentInventoryPane>().FirstOrDefault();
-        action?.PaneIndex = 5;
+        FsmState? mapState = __instance.fsm.GetState("Map");
+        if (mapState != null)
+        {
+            SetCurrentInventoryPane? action = mapState.Actions.OfType<SetCurrentInventoryPane>().FirstOrDefault();
+            action?.PaneIndex = 5;
+        }
+        FsmState? quickMapState = __instance.fsm.GetState("Quick Map");
+        if (quickMapState != null)
+        {
+            SetCurrentInventoryPane? action = quickMapState.Actions.OfType<SetCurrentInventoryPane>().FirstOrDefault();
+            action?.PaneIndex = 5;
+        }
     }
     
     [HarmonyPatch(typeof(PlayMakerFSM), nameof(PlayMakerFSM.SendEvent))]
